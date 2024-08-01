@@ -22,6 +22,7 @@ public:
     void draw();
     
     void eLoad();
+    void eClear();
     void load(string file);
     
     void keyPressed(int key);
@@ -45,6 +46,7 @@ public:
     ofxFloatSlider maxTime; // Slider for maximum time
     ofxFloatSlider space;
     ofxButton bLoad;
+    ofxButton bClear;
     ofxPanel gui;
     bool parsingSuccessful;
     string tsnePath;

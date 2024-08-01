@@ -26,7 +26,7 @@ void ofApp::setup() {
     spDropdown =  make_unique<ofxDropdown>("Metadata");
     gui.add(spDropdown->getDropdownParameters());
     spDropdown->addListener(this, &ofApp::onDropdownChange);
-    selectedSpecies = "";
+    
     load(tsnePath);
 
     spPath = ofToDataPath("species.json");
@@ -42,7 +42,9 @@ void ofApp::setup() {
 			spDropdown->add(species[i]);
 		}
     gui.add(spDropdown.get());
-    
+    bClear.addListener(this, &ofApp::eClear);
+    gui.add(bClear.setup("Clear Selection"));
+    selectedSpecies = "";
 }
 //--------------------------------------------------------------
 void ofApp::eLoad() {
@@ -51,7 +53,11 @@ void ofApp::eLoad() {
         load(result.filePath);
     }
 }
-
+void ofApp::eClear() {
+    selectedSpecies = ""; // Clear the selection to show all species
+    // spDropdown->selectNone(); // Clear the dropdown selection
+    ofLog() << "Selection cleared.";
+}
 //--------------------------------------------------------------
 void ofApp::load(string filename) {
     tsnePath = filename;
