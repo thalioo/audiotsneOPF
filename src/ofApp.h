@@ -15,6 +15,7 @@ public:
     string speciesType;
     float green_score;
     int id;
+    string path;
 };
 
 class ofApp : public ofBaseApp{
@@ -39,7 +40,7 @@ public:
     void mouseExited(int x, int y);
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
-    void sendMessage(int soundID);
+    void sendMessage(string file,float x,float y,float z);
     
     vector<AudioClip> sounds;
     

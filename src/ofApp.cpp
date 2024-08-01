@@ -86,14 +86,15 @@ void ofApp::load(string filename) {
     file >> js;
     species.clear();
     
-    ofVec2f minPoint(1e17, 1e18);
-    ofVec2f maxPoint(-1e18, -1e18);
+    ofVec3f minPoint(1e17, 1e18);
+    ofVec3f maxPoint(-1e18, -1e18);
     
     for (auto & entry : js) {
         if (!entry.empty()) {
             string path = entry["path"];
             float x = entry["point"][0];
             float y = entry["point"][1];
+            float z = entry["point"][2];
             string timeStr = entry["time"];
             float time = convertTimeStringToMinutes(timeStr);
             string species = entry["species"];
@@ -102,12 +103,15 @@ void ofApp::load(string filename) {
             
             minPoint.x = min(minPoint.x, x);
             minPoint.y = min(minPoint.y, y);
+            minPoint.z = min(minPoint.z, z);
             maxPoint.x = max(maxPoint.x, x);
             maxPoint.y = max(maxPoint.y, y);
+            maxPoint.z = max(maxPoint.z, z);
             AudioClip newSound;
             
+            newSound.path = path;
             newSound.sound.load(path);
-            newSound.point.set(x, y);
+            newSound.point.set(x, y,z);
             newSound.t = 0;
             newSound.time = time;
             newSound.speciesType = species;
@@ -122,7 +126,8 @@ void ofApp::load(string filename) {
     // Normalize the points
     for (int i = 0; i < sounds.size(); i++) {
         sounds[i].point.set(ofMap(sounds[i].point.x, minPoint.x, maxPoint.x, 0, 1),
-                            ofMap(sounds[i].point.y, minPoint.y, maxPoint.y, 0, 1));
+                            ofMap(sounds[i].point.y, minPoint.y, maxPoint.y, 0, 1),
+                            ofMap(sounds[i].point.z, minPoint.z, maxPoint.z, 0, 1));
     }
 
 
@@ -187,7 +192,10 @@ void ofApp::mouseMoved(int x, int y) {
         if (distanceToMouse < mouseRadius && !sounds[i].sound.isPlaying() && (ofGetElapsedTimef() - sounds[i].t > pauseLength)) {
             sounds[i].t = ofGetElapsedTimef();
             sounds[i].sound.play();
-            sendMessage(sounds[i].id);
+            string sound_path = sounds[i].path;
+            std::string filename = sound_path.substr(sound_path.find_last_of('/') + 1);
+            std::cout<<filename<<std::endl;
+            sendMessage(filename,sounds[i].point.x,sounds[i].point.y,sounds[i].point.z);
 
 
         }
@@ -221,10 +229,14 @@ void ofApp::windowResized(int w, int h) {
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 }
-void ofApp::sendMessage(int soundId){
+void ofApp::sendMessage(string file,float x,float y,float z){
     ofxOscMessage m;
     m.setAddress("/test");
-    m.addIntArg(soundId);
+    m.addStringArg(file);
+    m.addFloatArg(x);
+    m.addFloatArg(y);
+    m.addFloatArg(z);
+    std::cout<<z<<std::endl;
     oscSender.sendMessage(m, false);
 }
 //--------------------------------------------------------------
