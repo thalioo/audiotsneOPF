@@ -1,9 +1,15 @@
 #include "ofApp.h"
+#include <regex>
 
 float ofApp::convertTimeStringToMinutes(const std::string &timeStr) {
-    int hours = std::stoi(timeStr.substr(0, 2));
-    int minutes = std::stoi(timeStr.substr(3, 2));
-    return hours * 60.0f + minutes;
+    std::regex timeFormatPattern(R"(\d{2}:\d{2})");
+    if(std::regex_match(timeStr, timeFormatPattern)){
+        int hours = std::stoi(timeStr.substr(0, 2));
+        int minutes = std::stoi(timeStr.substr(3, 2));
+        return hours * 60.0f + minutes;
+    }
+
+    return 0;
 }
 
 //--------------------------------------------------------------
@@ -12,7 +18,6 @@ void ofApp::setup() {
     bLoad.addListener(this, &ofApp::eLoad);
     gui.setup();
     gui.setName("Audio t-SNE");
-    
     // Initialize sliders with default values
     gui.add(maxDuration.set("maxDuration", 1.0, 0.1, 2.0));
     gui.add(mouseRadius.set("mouseRadius", 250, 100, 500));
@@ -45,6 +50,11 @@ void ofApp::setup() {
     bClear.addListener(this, &ofApp::eClear);
     gui.add(bClear.setup("Clear Selection"));
     selectedSpecies = "";
+    // sending messssage
+    oscHost = "192.168.1.193"; // Change this to the desired host
+    oscPort = 3333; // Change this to the desired port
+    oscSender.setup(oscHost, oscPort);
+
 }
 //--------------------------------------------------------------
 void ofApp::eLoad() {
@@ -77,6 +87,7 @@ void ofApp::load(string filename) {
     
     ofVec2f minPoint(1e17, 1e18);
     ofVec2f maxPoint(-1e18, -1e18);
+    
     for (auto & entry : js) {
         if (!entry.empty()) {
             string path = entry["path"];
@@ -85,19 +96,26 @@ void ofApp::load(string filename) {
             string timeStr = entry["time"];
             float time = convertTimeStringToMinutes(timeStr);
             string species = entry["species"];
+            float green_score = entry["green_space"];
+            int id = entry["id"];
             
             minPoint.x = min(minPoint.x, x);
             minPoint.y = min(minPoint.y, y);
             maxPoint.x = max(maxPoint.x, x);
             maxPoint.y = max(maxPoint.y, y);
             AudioClip newSound;
+            
             newSound.sound.load(path);
             newSound.point.set(x, y);
             newSound.t = 0;
             newSound.time = time;
-            newSound.speciesType = species; // Assign species type
+            newSound.speciesType = species;
+            newSound.green_score = green_score;
+            newSound.id = id;
             sounds.push_back(newSound);
+            
         }
+        
     }
 
     // Normalize the points
@@ -131,8 +149,6 @@ void ofApp::draw() {
         return;
     }
 
-    // string selectedSpecies = speciesDropdown.getSelected();
-
     for (int i = 0; i < sounds.size(); i++) {
         if ((sounds[i].time >= minTime && sounds[i].time <= maxTime)
          && (selectedSpecies == "" || sounds[i].speciesType == selectedSpecies)
@@ -163,6 +179,9 @@ void ofApp::mouseMoved(int x, int y) {
         if (distanceToMouse < mouseRadius && !sounds[i].sound.isPlaying() && (ofGetElapsedTimef() - sounds[i].t > pauseLength)) {
             sounds[i].t = ofGetElapsedTimef();
             sounds[i].sound.play();
+            sendMessage(sounds[i].id);
+
+
         }
     }
 }
@@ -192,13 +211,14 @@ void ofApp::windowResized(int w, int h) {
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg) {
-}
-
-//--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 }
-
+void ofApp::sendMessage(int soundId){
+    ofxOscMessage m;
+    m.setAddress("/test");
+    m.addIntArg(soundId);
+    oscSender.sendMessage(m, false);
+}
 //--------------------------------------------------------------
 set<string> ofApp::extractUniqueSpeciesTypes(const ofJson &json) {
     set<string> uniqueSpeciesSet;

@@ -400,7 +400,22 @@ obj/osx/Release/src/ofApp.o: \
   /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxGui/src/ofxColorPicker.h \
   /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxGui/src/ofxPanel.h \
   /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxDropdown/src/ofxDropdown.h \
-  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxDropdown/src/ofxDropdownOption.hpp
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxDropdown/src/ofxDropdownOption.hpp \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOsc.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscArg.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscMessage.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscSender.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscException.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscBundle.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscReceiver.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h \
+  /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h
 
 /Users/thalia/Antoine/audiotsne/ml4a-ofx/apps/AudioTSNEViewer/src/ofApp.h:
 
@@ -1203,3 +1218,33 @@ obj/osx/Release/src/ofApp.o: \
 /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxDropdown/src/ofxDropdown.h:
 
 /Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxDropdown/src/ofxDropdownOption.hpp:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOsc.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscArg.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscMessage.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscSender.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscException.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscBundle.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/src/ofxOscReceiver.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h:
+
+/Users/thalia/Antoine/audiotsne/of_v0.12.0_osx_release/addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h:

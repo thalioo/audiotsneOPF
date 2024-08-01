@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxDropdown.h"
+#include "ofxOsc.h"
+#define PORT 3333
 
 struct AudioClip {
 public:
@@ -11,6 +13,8 @@ public:
     float t;
     float time;
     string speciesType;
+    float green_score;
+    int id;
 };
 
 class ofApp : public ofBaseApp{
@@ -35,10 +39,15 @@ public:
     void mouseExited(int x, int y);
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
+    void sendMessage(int soundID);
     
     vector<AudioClip> sounds;
     
+    // osc tings
+    ofxOscSender oscSender;
+    std::string oscHost;
+    int oscPort;
+
     ofParameter<float> maxDuration;
     ofParameter<float> mouseRadius;
     ofParameter<float> pauseLength;
