@@ -51,9 +51,10 @@ public:
     ofParameter<float> maxDuration;
     ofParameter<float> mouseRadius;
     ofParameter<float> pauseLength;
-    ofxFloatSlider minTime; // Slider for minimum time
-    ofxFloatSlider maxTime; // Slider for maximum time
-    ofxFloatSlider space;
+    ofxFloatSlider minTime; 
+    ofxFloatSlider maxTime; 
+    ofxFloatSlider maxSpace;
+    ofxFloatSlider minSpace;
     ofxButton bLoad;
     ofxButton bClear;
     ofxPanel gui;

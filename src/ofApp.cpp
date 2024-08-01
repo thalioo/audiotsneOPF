@@ -24,7 +24,8 @@ void ofApp::setup() {
     gui.add(pauseLength.set("pauseLength", 2.0, 0.2, 5.0));
     gui.add(minTime.setup("Min Time", 0.0, 0.0, 1440.0)); 
     gui.add(maxTime.setup("Max Time", 1440.0, 0.0, 1440.0)); 
-    gui.add(space.setup("Space", 0.0, -1.0, 1.0)); 
+    gui.add(minSpace.setup("Less Green Space", -1.0, 0.0, 1.0));
+    gui.add(maxSpace.setup("Most Green Space", 1.0, 0.0, 1.0)); 
     gui.add(bLoad.setup("Load model"));
     // dropdown settin
     speciesTypes.setName("Species");
@@ -152,6 +153,7 @@ void ofApp::draw() {
     for (int i = 0; i < sounds.size(); i++) {
         if ((sounds[i].time >= minTime && sounds[i].time <= maxTime)
          && (selectedSpecies == "" || sounds[i].speciesType == selectedSpecies)
+         && (sounds[i].green_score >= minSpace && sounds[i].green_score <= maxSpace)
          ) {
             if (sounds[i].sound.isPlaying()) {
                 ofSetColor(0, 255, 0, 180);
@@ -159,6 +161,12 @@ void ofApp::draw() {
                 ofSetColor(255, 180);
             }
             ofDrawCircle(ofGetWidth() * sounds[i].point.x, ofGetHeight() * sounds[i].point.y, 4);
+        }
+        else {
+            // Stop sounds that should not be displayed
+            if (sounds[i].sound.isPlaying()) {
+                sounds[i].sound.stop();
+            }
         }
     }
     gui.draw();
